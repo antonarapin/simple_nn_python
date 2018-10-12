@@ -20,7 +20,7 @@ Simple neural network described in this project is nothing more than a fully con
 
 Here is the layout:
 
-![alt text](https://github.com/antonarapin/simple_nn_python/images/nn_layout.png "Fully connected graph")
+![alt text](https://github.com/antonarapin/simple_nn_python/blob/project_description/images/nn_layout.png "Fully connected graph")
 
 ### Linear Algebra
 
