@@ -26,7 +26,7 @@ Simple neural network described in this project is nothing more than a fully con
 
 Here is the layout:
 
-![alt text](https://github.com/antonarapin/simple_nn_python/blob/project_description/images/net_layout.png "Fully connected graph")
+![alt text](https://github.com/antonarapin/simple_nn_python/blob/project_description/images/network_layout.png "Fully connected graph")
 
 (Thanks to the author [this repo](https://github.com/martisak/dotnets) for typing up a quick and pretty visualization tool)
 
