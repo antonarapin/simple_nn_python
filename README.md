@@ -69,15 +69,26 @@ The operation described above happens in each node in each layer, going from lef
 
 #### Backward Path
 
+Now we need to measure the error, figure out what weights contributed to the error and to what extent and of course fix those bad boys. 
 
----
+In this example, we will calculate the difference between the target output and actual network output and call it an error. There are different ways to calculate the error, like squared error and such, but we will go with the easier example here. 
 
-### Linear Algebra
+Now we need to determine how much each weight contributed to the error. In order to achieve this, we will start look at the weights that connect the last hidden layer with the ouput layer, since they are the closest to the error we have right now. But how do we calculate the contribution of a given weight to the error? The answer is the partial derivative of the error relative to a given weight. Hence, we want to find the value of *∂Error/∂w<sub>ij</sub>*, and the easiest way to find it is to simply decompose the partial derivative using chain rule as shown below.
+
+![alt text](https://github.com/antonarapin/simple_nn_python/blob/project_description/images/err_deriv.png "Partial derivative of Error with respect to a specific weight")
+
+Okay, let's first state what those variables mean. The first one is *out<sub>j</sub>*, which is the output of the node that takes in the value to which our weight of interest is applied, so, literally, *out<sub>j</sub>* = *φ(Σw<sub>ij</sub>* * *v<sub>i</sub>)*. Now, *lin<sub>j</sub>* can be viewed as a linear part of *out<sub>j</sub>*, in othr words (symbols, actually) *lin<sub>j</sub>* = *Σw<sub>ij</sub>* * *v<sub>i</sub>*.
+
+Now we will spell out what each of the terms of the scarry chain rule equation above means. Notice that since we are using a simple difference between the target value and output as error value, we can get away with assuming *∂Error/∂out<sub>j</sub>* is simply equal to the error. The second term *∂out<sub>j</sub>/∂lin<sub>j</sub>* is simply equal to the derivative of the activation function, whether it is ReLU or Sigmoid. And finally the last term is *∂lin<sub>j</sub>/∂w<sub>ij</sub>*, which, is simply the value that *w<sub>ij</sub>* is being applied to, and which we denote as *v<sub>i</sub>*. 
+
+Notice that if we start our calculation from the output layer, we can go back and use precomputed errors for each node to get the partial contributions of weights to the left of that node (as it appears on the graph). Once we determine how much each weight contributed to the overall error, we can simply "fix" that weight according to the amount of its contribution to the overall error. Also, we can control how much the weight should be fixed according to its error contribution by specifying the *learning rate*. For example, if *∂Error/∂w<sub>ij</sub>* = 0.1 and *leaning rate* = 0.5, then we update our old weight by *learning rate* * *∂Error/∂w<sub>ij</sub>* = 0.5 * 0.1, so the new value of our weight would be *w<sub>ij</sub>* = *w<sub>ij</sub>* + *learning rate* * *∂Error/∂w<sub>ij</sub>*.
+
+Believe it or not, this is it, we are just going through the network in a backward manner starting from the output layer and "fixing" every weight on our way relative to its error contribution. And once we do it many times, the weights will eventually converge to outputting the right thing (assuming are training experiences are not to complicated for network to tackle)!
 
 ---
 
 ## Implementation
 
-At this point, neural network might seem like an atrocious thing to implement, and it for sure might be so, especially if you do it in c (yes, a new project is coming). But fear not! Neural networks with Python and Numpy are very laconic and cute. 
+At this point, neural network might seem like an atrocious thing to implement, and it for sure might be so, especially if you do it in C (oh yes I did it, and I'll push it uphere sometime). But fear not! Neural networks with Python and Numpy are very laconic and cute. 
 
 
