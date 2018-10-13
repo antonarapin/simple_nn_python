@@ -63,7 +63,7 @@ ReLU function:
 
 The operation described above happens in each node in each layer, going from left to right from the first hidden layer to the output layer. Eventually, the outputs of the nodes in the ouput layer are the outputs of our network. And that is pretty much it for the forward path, very straight-forward (yes, you have been PUNished)! 
 
-<sub>I know, people regard puns as something simple and often react to them like "euhh, yeah", but I think puns are awesome! They are the examples of inline creativity, embellishing the expression with their beautiful brefity and ingenuity.</sub>
+<sub>I know, people regard puns as something simple and often react to them like "euhh, yeah", but I think puns are awesome! They are the examples of inline creativity, embellishing the expression with their beautiful brevity and ingenuity.</sub>
 
 ---
 
